@@ -1,0 +1,57 @@
+h1{
+  text-align: center;
+}
+a{
+  text-decoration: none;
+}
+img {
+    border-radius: 50%;
+    display: block;
+    margin: auto;
+    width: 50px;
+    height:50px;
+  }
+
+.user-info{
+  text-align: center;
+}
+
+form {
+  margin-bottom: 2em;
+  button {
+    margin-top: 1em !important;
+  }
+}
+
+p {
+  font-size: small;
+  //font-size: 0.8em;
+}
+
+ion-label {
+  margin-left: 0.5em;
+}
+
+ion-input {
+  padding: 0.5em;
+}
+
+.invalid {
+  border-bottom: 1px solid #ff6153;
+}
+
+.error-message {
+  min-height: 2.2rem;
+  ion-label {
+    margin: 2px 0;
+    font-size: 60%;
+    color: #ff6153;
+  }
+  .item-inner {
+    border-bottom: 0 !important;
+  }
+}
+.my-custom-interface .highlight-color {
+  --color: tomato;
+  
+}

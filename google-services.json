@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "840115476461",
+    "firebase_url": "https://co-talk.firebaseio.com",
+    "project_id": "co-talk",
+    "storage_bucket": "co-talk.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:840115476461:android:94e102aab587bf3f59b9e4",
+        "android_client_info": {
+          "package_name": "com.marianovelamazan.co_lab"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "840115476461-id7sgnn747uomtf0sm7cq736j4upfcof.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBJy3jZcguq5qgfvJG4OcbpZmI4WQTvHTE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "840115476461-id7sgnn747uomtf0sm7cq736j4upfcof.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

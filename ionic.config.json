@@ -1,0 +1,7 @@
+{
+  "name": "co-talk",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular"
+}

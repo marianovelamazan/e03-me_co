@@ -1,0 +1,103 @@
+<ion-header>
+  <ion-toolbar>
+    
+   <!--<img class="user_avatar_top" [src]="user_photo$ || './assets/unicorn.svg'">--> 
+    <ion-title size="small" >
+       {{user_name$}}'s emotions 
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="cancelModal()"><ion-icon name="close-circle"></ion-icon></ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content class="ion-padding">
+  <ion-grid>
+   <ion-row>
+     <ion-col size="12">
+       <img class="user_avatar_top" [src]="user_photo$ || './assets/unicorn.svg'">
+       <h3  class="ion-text-center">emotions</h3>
+     </ion-col>
+   </ion-row>
+   <ion-row>
+    <ion-col size="12">
+      <ion-subtitle>this is how {{user_name$}} is feeling, </ion-subtitle>
+      <ion-subtitle>can you help?</ion-subtitle>
+    </ion-col>
+  </ion-row>
+ <ion-row >
+  <ion-col size=12>
+  <ion-list>
+    <ion-title class="achievement_color">achievement</ion-title>
+    <hr/>
+    <div *ngFor="let e of userEmotions$ | async">
+  <div *ngFor="let em of e.opinions">
+    <ion-grid>
+    <ion-row  *ngIf="em.uid === userId$">
+    <div *ngIf="em.type=='achievement'">
+    <ion-col  >{{em.emotion}}:  </ion-col><ion-col class="ion-padding-end">{{em.value}}</ion-col>
+    <ion-col class="ion-padding-start" size="6">
+      <ion-icon color="success" name="thumbs-up" *ngIf="(em.value >= 5 && em.valence==='positive')|| (em.value<=5 && em.valence==='negative')"> </ion-icon>
+        <ion-icon color="danger" name="thumbs-down" *ngIf="(em.value > 5 && em.valence=='negative')||(em.value<5 && em.valence=='positive')"></ion-icon>
+    </ion-col>
+  </div>
+    </ion-row>
+  </ion-grid>
+</div>
+
+ </div>
+
+</ion-list>
+
+</ion-col>
+</ion-row>
+<ion-row >
+  <ion-col size=12>
+<ion-list>
+  <ion-title class="epistemic_color" >epistemic</ion-title>
+  <hr/>
+  <div *ngFor="let e of userEmotions$ | async">
+<div *ngFor="let em of e.opinions">
+  
+  <ion-item *ngIf="em.type=='epistemic'">
+    <ion-label>{{em.emotion}}:  {{em.value}}</ion-label>
+    <ion-label>
+      <ion-icon color="success" name="thumbs-up" *ngIf="(em.value > 5 && em.valence==='positive')|| (em.value<5 && em.valence==='negative')"> </ion-icon>
+        <ion-icon color="danger" name="thumbs-down" *ngIf="(em.value > 5 && em.valence=='negative')||(em.value<5 && em.valence=='positive')"></ion-icon>
+     </ion-label>
+</ion-item>
+</div>
+
+</div>
+
+</ion-list>
+</ion-col>
+</ion-row>
+
+
+
+<ion-row >
+  <ion-col size=12>
+<ion-list>
+  <ion-title class="social_color" >social</ion-title>
+  <hr/>
+  <div *ngFor="let e of userEmotions$ | async">
+<div *ngFor="let em of e.opinions">
+  
+  <ion-item *ngIf="em.type=='social'">
+    <ion-label>{{em.emotion}}:  {{em.value}}</ion-label>
+    <ion-label>
+      <ion-icon color="success" name="thumbs-up" *ngIf="(em.value > 5 && em.valence==='positive')|| (em.value<5 && em.valence==='negative')"> </ion-icon>
+        <ion-icon color="danger" name="thumbs-down" *ngIf="(em.value > 5 && em.valence=='negative')||(em.value<5 && em.valence=='positive')"></ion-icon>
+     </ion-label>
+</ion-item>
+</div>
+
+</div>
+
+</ion-list>
+</ion-col>
+</ion-row>
+
+
+</ion-grid>
+</ion-content>

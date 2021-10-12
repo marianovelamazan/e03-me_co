@@ -1,0 +1,195 @@
+<ion-list>
+  <ion-list-header>
+    <ion-label><b>solve PoLPs:</b></ion-label>
+  </ion-list-header>
+<!--  <ion-card>-->
+<!--    &lt;!&ndash;<ion-card>  &ndash;&gt;-->
+<!--    <ion-card-header>-->
+<!--      <ion-card-subtitle>por terminar:</ion-card-subtitle>-->
+<!--      <ion-card-title>foto-problema XX-10</ion-card-title>-->
+<!--      <hr />-->
+<!--      <img class="foto-problem" src="./assets/fp-10.jpg" />-->
+<!--    </ion-card-header>-->
+
+<!--    <ion-card-content>-->
+<!--      <ion-text>-->
+<!--        <p>-->
+<!--          En esta cerca de jardín puedes ver un esquema de figura geometrica perfecta, en el que se representan semicírcunferencias iguales, tangentes y enlazadas. Dentro de cada semicircunferencia hay un triángulo curvilineo cuyos tres lados son arcos de circunferencia. Si el diámetro de la semicircunferencia mide 8 centímetros, ¿cuánto vale el área de uno de los triángulos curvilíneos? Dar el resultado con tres decimales redondeados.-->
+<!--        </p>-->
+<!--        -->
+<!--      </ion-text>-->
+<!--      <hr />-->
+
+<!--      <ion-button-->
+<!--        size="small"-->
+<!--        shape="round"-->
+<!--        color="light"-->
+<!--        slot="end"-->
+<!--        [routerLink]="'/chats/pMZUuXYIFhAZBZXozBUy'"-->
+<!--      >-->
+<!--        <ion-icon name="construct"></ion-icon>-->
+<!--        <ion-label> work</ion-label>-->
+<!--      </ion-button>-->
+
+<!--      <ion-button-->
+<!--        size="small"-->
+<!--        shape="round"-->
+<!--        color="light"-->
+<!--        [routerLink]="'/reflections/pMZUuXYIFhAZBZXozBUy'"-->
+<!--      >-->
+<!--        <ion-icon-->
+<!--          src="./assets/meh-rolling-eyes-regular.svg"-->
+<!--        ></ion-icon>-->
+<!--        <ion-label> reflect</ion-label>-->
+<!--      </ion-button>-->
+<!--    </ion-card-content>-->
+<!--  </ion-card>-->
+  <ion-card *ngFor="let activity of activityList" [ngClass]="{'orderActivity': (activity.working | async)?.status == 2}">
+    <!--<ion-card>  -->
+    <ion-card-header>
+      <ion-card-subtitle>{{activity.subTitle}}</ion-card-subtitle>
+      <ion-card-title>{{activity.title}}</ion-card-title>
+      <hr />
+      <img class="foto-problem" [src]="activity.image" />
+    </ion-card-header>
+
+    <ion-card-content>
+      <ion-text>
+        <p>
+          {{activity.text}}
+        </p>
+        <ul class="foto-problem-explanations" *ngIf="activity.images && activity.images.length > 0">
+          <li *ngFor="let image of activity.images"><img [src]="image" /></li>
+        </ul>
+<!--        <div *ngIf="activity.working  | async as working">-->
+<!--            {{working | json}}-->
+<!--        </div>-->
+        <p *ngIf="activity.text2">
+          {{activity.text2}}
+        </p>
+      </ion-text>
+      <hr />
+<!--ESTE FOTO PROBLEMA NO SE LLEGÓ A HACER...-->
+      <ion-button *ngIf="activity.workEnabled"
+        size="small"
+        shape="round"
+        color="light"
+        slot="end"
+        (click)="workOn(activity)"
+
+      >
+<!--          [routerLink]="'/chats/pMZUuXYIFhAZBZXozBUy'"-->
+        <ion-icon name="construct"></ion-icon>
+        <ion-label> work</ion-label>
+      </ion-button>
+      <!--          [routerLink]="'/reflections/pMZUuXYIFhAZBZXozBUy'"-->
+<!--ESTO PARA UNA FASE POSTERIOR
+      <ion-button
+              *ngIf="activity.workEnabled"
+        size="small"
+        shape="round"
+        color="light"
+        (click)="reflactionOn(activity)"
+
+      >
+
+        <ion-icon
+          src="./assets/meh-rolling-eyes-regular.svg"
+        ></ion-icon>
+        <ion-label> reflect</ion-label>
+      </ion-button>
+    -->
+    </ion-card-content>
+  </ion-card>
+
+<!--  <ion-card>-->
+<!--    <ion-card-header>-->
+<!--      <ion-card-subtitle>terminado:</ion-card-subtitle>-->
+<!--      <ion-card-title>foto-problema XX-7</ion-card-title>-->
+<!--      <hr />-->
+<!--      <img class="foto-problem" src="./assets/fp-7.jpg" />-->
+<!--    </ion-card-header>-->
+<!--    &lt;!&ndash; <ion-item>-->
+<!--      <ion-icon name="pin" slot="start"></ion-icon>-->
+<!--      <ion-label>Ver en el mapa</ion-label>-->
+<!--      <ion-button fill="outline" shape="round" color="light" slot="end"-->
+<!--        >Ver</ion-button-->
+<!--      >-->
+<!--    </ion-item>-->
+<!--&ndash;&gt;-->
+<!--    <ion-card-content>-->
+<!--      <ion-text>-->
+<!--        <p>-->
+<!--          En esta foto puedes ver una semicircunferencia que contiene un círculo con el escudo de la ciudad y dos triángulos curvilineos, con forma de “cuernos de rinoceronte”, dentro de los cuales puedes ver unos dragones. Si la superficie del círculo es 7.853,98 cm2, ¿cuánto vale el área de uno de los “cuernos de rinoceronte”? Dar el resultado con dos decimales redondeados.-->
+<!--        </p>-->
+<!--      </ion-text>-->
+<!--      <hr />-->
+
+<!--      <ion-button-->
+<!--        size="small"-->
+<!--        shape="round"-->
+<!--        color="light"-->
+<!--        slot="end"-->
+<!--        [routerLink]="'/chats/i6h7kjPDchJ3BqADjLRi'"-->
+<!--      >-->
+<!--        <ion-icon name="construct"></ion-icon>-->
+<!--        <ion-label>work</ion-label>-->
+<!--      </ion-button>-->
+
+<!--      <ion-button-->
+<!--        size="small"-->
+<!--        shape="round"-->
+<!--        color="light"-->
+<!--        [routerLink]="'/reflections/i6h7kjPDchJ3BqADjLRi'"-->
+<!--      >-->
+<!--        <ion-icon-->
+<!--          src="./assets/meh-rolling-eyes-regular.svg"-->
+<!--        ></ion-icon>-->
+<!--        <ion-label>reflect</ion-label>-->
+<!--      </ion-button>-->
+<!--    </ion-card-content>-->
+<!--  </ion-card>-->
+<!--  <ion-card>-->
+<!--    <ion-card-header>-->
+<!--      <ion-card-subtitle>terminado:</ion-card-subtitle>-->
+<!--      <ion-card-title>foto-problema XX-5</ion-card-title>-->
+<!--      <hr />-->
+<!--      <img class="foto-problem" src="./assets/fpxx5.png" />-->
+<!--    </ion-card-header>-->
+
+<!--    <ion-card-content>-->
+<!--      <ion-text>-->
+<!--        <p>-->
+<!--          Aquí puedes ver una réplica exacta de La Giralda a escala-->
+<!--          1:104. Si el volumen de esta réplica es de 18 dm3, ¿cuál será-->
+<!--          el volumen de La Giralda expresado en metros cúbicos? Dar el-->
+<!--          resultado con una sola cifra decimal redondeada.-->
+<!--        </p>-->
+<!--      </ion-text>-->
+<!--      <hr />-->
+
+<!--      <ion-button-->
+<!--        size="small"-->
+<!--        shape="round"-->
+<!--        color="light"-->
+<!--        slot="end"-->
+<!--        [routerLink]="'/chats/4f9yWTIu8UceqAWswLYd'"-->
+<!--      >-->
+<!--        <ion-icon name="construct"></ion-icon>-->
+<!--        <ion-label>work</ion-label>-->
+<!--      </ion-button>-->
+
+<!--      <ion-button-->
+<!--        size="small"-->
+<!--        shape="round"-->
+<!--        color="light"-->
+<!--        [routerLink]="'/reflections/4f9yWTIu8UceqAWswLYd'"-->
+<!--      >-->
+<!--        <ion-icon-->
+<!--          src="./assets/meh-rolling-eyes-regular.svg"-->
+<!--        ></ion-icon>-->
+<!--        <ion-label>reflect</ion-label>-->
+<!--      </ion-button>-->
+<!--    </ion-card-content>-->
+<!--  </ion-card>-->
+</ion-list>

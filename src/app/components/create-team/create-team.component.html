@@ -1,0 +1,86 @@
+<ion-header>
+    <ion-toolbar>
+    <ion-title size="small">create your new team:</ion-title>
+    <ion-button color="light" shape="round" size="small" slot="end" (click)="closeButton()"><ion-icon name="close-circle-outline"></ion-icon></ion-button>
+    <!--<div class="endContent">
+        <svg (click)="closeButton()" width="25" height="25" xmlns="http://www.w3.org/2000/svg" class="ionicon"
+             viewBox="0 0 512 512"><title>Close
+            Circle</title><path d="M448 256c0-106-86-192-192-192S64 150 64 256s86 192 192 192 192-86 192-192z" fill="none" stroke="currentColor" stroke-miterlimit="10" stroke-width="32"/><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32" d="M320 320L192 192M192 320l128-128"/></svg>
+
+    </div>-->
+</ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">        
+
+        <ion-slides  pager="true" #slider (ionSlideDidChange)="pageChanged(slider)">
+            <ion-slide >
+                <ion-grid >
+                    <ion-row>
+                        <ion-col  >
+                            <ion-item>
+                                <ion-label position = "stacked">name of team:</ion-label>
+                              
+                                <ion-input (keyup.enter)="email1.setFocus()" [(ngModel)]="nameOfTeam"></ion-input>
+                            </ion-item>
+                        </ion-col>
+                    </ion-row>
+                    <ion-row >
+                        <ion-col >
+                            <ion-item>
+                                <ion-label position="stacked">say hi to the community!</ion-label>
+                            
+                                <ion-input #explanatory (keyup.enter)="createTeam()" [(ngModel)]="explanatoryText"
+                                           placeholder="a few words about you guys!"></ion-input>
+                            </ion-item>
+                        </ion-col>
+                    </ion-row>
+                </ion-grid>
+            </ion-slide>
+            <ion-slide >
+                <ion-grid >
+                    <ion-row >
+                        <ion-col >
+                            
+                            <ion-item>
+                                <ion-label position="stacked">invite some friends:</ion-label>
+                                <hr/>
+                                <ion-input (keyup.enter)="email2.setFocus()" #email1 [(ngModel)]="invitee"
+                                           placeholder="e-mail"></ion-input>
+                            </ion-item>
+                        </ion-col>
+                    </ion-row>
+                    <ion-row >
+                        <ion-col >
+                            <ion-item>
+                                <ion-label position="stacked">invite two people:</ion-label>
+                                
+                                <ion-input #email2 (keyup.enter)="email3.setFocus()" [(ngModel)]="invitee2"
+                                            placeholder="e-mail"></ion-input>
+                            </ion-item>
+                        </ion-col>
+                    </ion-row>
+                    <ion-row>
+                        <ion-col >
+                            <ion-item>
+                                <ion-label position="stacked">three is the best number!:</ion-label>
+
+                                <ion-input #email3 (keyup.enter)="explanatory.setFocus()" [(ngModel)]="invitee3"
+                                            placeholder="e-mail"></ion-input>
+                            </ion-item>
+                        </ion-col>
+                    </ion-row>
+                    
+                    <ion-row >
+                        <ion-col size="2">
+                            <ion-button shape="round" color="light" (click)="createTeam()">invite</ion-button>
+                        </ion-col>
+                    </ion-row>
+                </ion-grid>
+            </ion-slide>
+            <!--<ion-label size="small">
+               page {{currentPage + 1}}/2
+            </ion-label>-->
+        </ion-slides>
+        
+</ion-content>

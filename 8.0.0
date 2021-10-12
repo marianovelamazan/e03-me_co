@@ -1,0 +1,8 @@
++ cordova-android@10.1.1
+added 56 packages from 40 contributors and audited 1443 packages in 34.879s
+
+63 packages are looking for funding
+  run `npm fund` for details
+
+found 64 vulnerabilities (35 moderate, 28 high, 1 critical)
+  run `npm audit fix` to fix them, or `npm audit` for details

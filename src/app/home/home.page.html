@@ -1,0 +1,196 @@
+
+<ion-header class="homeHeader">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <!--<ion-button slot="start" [routerLink]=" ">
+              <ion-icon name="home"></ion-icon>
+            </ion-button>-->
+            <ion-menu-button slot="start" autoHide="true"></ion-menu-button>
+    </ion-buttons>
+    <!--<ion-title size="small" *ngIf="activeTeamName">
+      team {{activeTeamName}}
+    </ion-title>-->
+      <ion-item *ngIf="auth.user$ | async as user;" slot="end">
+          <ion-select [selectedText]="'team '+activeTeamName" interface="popover" [interfaceOptions]="customAlertOptions"
+                      (ionChange)="teamChanged($event)"
+                      [formControl]="teamSelector">
+              
+              <ion-select-option [value]="team.id" *ngFor="let team of userTeams$ | async" [ngClass]="{'teamOwner': (auth.user$ | async)?.uid == team.teamOwner}">
+                  {{team.teamName}}
+                  {{(auth.user$ | async)?.uid == team.teamOwner ?  '(yours)' : ''}}
+              </ion-select-option>
+              <!--<ion-select-option value="createTeam" class="highlight-color" (click)="createTeam()">
+                <em>create team</em>
+            </ion-select-option>-->
+              
+          </ion-select>
+      </ion-item>
+      
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="ion-padding">
+    <!--<h3>Trabajos de:</h3>-->
+    <h1>¡hola!</h1>
+    <hr />
+    <div class="login">
+      <div *ngIf="auth.user$ | async as user; else login">
+        <a href="#" routerLink="/profile"><img [src]="user?.photoURL || 'assets/unicorn.svg'"  /></a>
+        <p class="user-info">
+          {{ user.displayName }}
+          </p>
+          
+        
+        
+        <!--<span class="tag is-light">{{ user.uid }}</span>
+
+        <hr>-->
+<!-- CREATE A NEW CHAT color="light"-->
+<!--          <div>-->
+<!--              <ion-button-->
+<!--                      size="small"-->
+<!--                      shape="round"-->
+<!--                      fill="clear"-->
+<!--                      (click)="createTeam()"-->
+<!--              ><ion-icon src="./assets/newPoLP.svg"></ion-icon>-->
+<!--              </ion-button-->
+<!--              >-->
+<!--          </div>-->
+<!--        <ion-button-->
+<!--          size="small"-->
+<!--          shape="round"-->
+<!--          fill="clear"-->
+<!--          (click)="cs.create()"-->
+<!--          ><ion-icon src="./assets/newPoLP.svg"></ion-icon>-->
+<!--          </ion-button-->
+<!--        >-->
+
+<!--        <hr />-->
+<!--        <ion-button-->
+<!--        size="small"-->
+<!--        shape="round"-->
+<!--        color="light"-->
+<!--        slot="end"-->
+<!--        [routerLink]="'/chats/M69uo6PrN5HvQGF9S81k'"-->
+<!--      >-->
+<!--        <ion-icon name="construct"></ion-icon>-->
+<!--        <ion-label> work</ion-label>-->
+<!--      </ion-button>-->
+<ion-row *ngIf="(userTeams$ | async)?.length > 0">
+  <ion-col size=12>
+    <ion-button expand="block" color="light" size="small" shape="round" (click)="createTeam()">create new team?</ion-button>
+  </ion-col>
+</ion-row>
+        <app-po-lps *ngIf="(userTeams$ | async)?.length > 0; else noTeams" [teamName]="activeTeamName"></app-po-lps>
+        
+        <ng-template #noTeams>
+             <div  class="noTeams ion-padding ion-margin-top">
+               <p>
+                 create a team and start doing activities!
+                </p>
+                 <ion-button
+                         class="ion-margin-top"
+                         size="small"
+                         shape="round"
+                         color="light"
+                         slot="end"
+                         (click)="createTeam()"
+                 > <ion-icon name="people"  class="ion-padding"></ion-icon>
+                
+                     <ion-label> create team</ion-label>
+                 </ion-button>
+             </div>
+         </ng-template>
+      </div>
+      <hr />
+
+      <ng-template #login>
+        <form [formGroup]="loginForm">
+          <ion-item>
+            <ion-label position="stacked">e-mmail</ion-label>
+            <ion-input
+              formControlName="email"
+              type="email"
+              placeholder="Your email address"
+              [class.invalid]="!loginForm.controls['email'].valid &&
+            loginForm.controls['email'].touched"
+            >
+            </ion-input>
+          </ion-item>
+          <ion-item
+            class="error-message"
+            *ngIf="!loginForm.controls['email'].valid &&
+             loginForm.controls['email'].touched"
+          >
+            <ion-label>please enter a valid email address.</ion-label>
+          </ion-item>
+
+          <ion-item>
+            <ion-label position="stacked">password</ion-label>
+            <ion-input
+              formControlName="password"
+              type="password"
+              placeholder="Your password"
+              [class.invalid]="!loginForm.controls['password'].valid&& loginForm.controls['password'].touched"
+            >
+            </ion-input>
+          </ion-item>
+          <ion-item
+            class="error-message"
+            *ngIf="!loginForm.controls['password'].valid
+            && loginForm.controls['password'].touched"
+          >
+            <ion-label>your password needs 6 characters.</ion-label>
+          </ion-item>
+          <hr />
+          <ion-button
+            (click)="loginUser(loginForm)"
+            shape="round"
+            expand="block"
+            color="light"
+            [disabled]="!loginForm.valid"
+          >
+            log In
+          </ion-button>
+        </form>
+
+        <ion-button
+          shape="round"
+          expand="block"
+          color="light"
+          routerLink="/signup"
+        >
+          create a new account
+        </ion-button>
+
+        <ion-button
+          shape="round"
+          expand="block"
+          color="light"
+          routerLink="/reset-password"
+        >
+          I forgot my password :(
+        </ion-button>
+        <!--//*LOGIN WITH GOOGLE*************************************************************//-->
+        <!-- <ion-button
+          shape="round"
+          expand="block"
+          color="light"
+          (click)="auth.googleSignIn()"
+          >Login with Google</ion-button
+        >
+        -->
+        <!--//*END OF LOGIN WITH GOOGLE*************************************************************//-->
+      </ng-template>
+
+      <ion-button
+        shape="round"
+        expand="block"
+        color="light"
+        (click)="auth.signOut()"
+        >sign out</ion-button
+      >
+    </div>
+  </div>
+</ion-content>

@@ -1,0 +1,9 @@
+ionic cordova build android --prod --release
+jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore my-release-key.jks platforms/android/app/build/outputs/apk/release/app-release-unsigned.apk my-alias
+cd "C:\Users\maria\AppData\Local\Android\Sdk\build-tools\28.0.3"
+.\zipalign -v 4 D:\phd\experiments\e03-co-lab\platforms\android\app\build\outputs\apk\release\app-release-unsigned.apk co-lab.apk
+.\apksigner.bat verify co-lab.apk
+cd d:/phd/experiments/e03*
+
+GENERATE BUNDLE
+https://medium.com/swlh/generating-an-android-app-bundle-from-your-ionic-app-without-android-studio-5bc3acaf4528

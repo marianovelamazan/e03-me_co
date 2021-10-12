@@ -1,0 +1,149 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+     <ion-back-button></ion-back-button>
+      <!--<ion-button slot="start" [routerLink]=" ">
+        <ion-icon name="home" ></ion-icon>
+      </ion-button>-->
+      <ion-menu-button slot="end" autoHide="true"></ion-menu-button>
+    </ion-buttons>
+    <ion-title size="small">
+     grupo Alpha | reflect
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content class="ion-padding">
+    <ion-fab vertical="top" horizontal="end" edge slot="fixed">
+        <ion-fab-button
+          size="small"
+          shape="round"
+          color="light"
+          (click)="statisticsVisibility();"
+        >
+          <ion-icon name="stats"></ion-icon>
+        </ion-fab-button>
+      </ion-fab>
+
+ <!--GROUP STATISTICS-->
+ <ng-container *ngIf="statistics$ | async as statistic">
+      <ion-card *ngIf="statisticsIsVisible$" class="statistics">
+          <ion-card-header>
+            <ion-card-subtitle>estadísticas</ion-card-subtitle>
+            <ion-card-title>grupo alpha</ion-card-title>
+            <hr />
+             <!--<img class="foto-problem" src="./assets/fp-2.jpg" />-->
+          </ion-card-header>
+          <!--<ion-item>
+            <ion-icon name="pin" slot="start"></ion-icon>
+            <ion-label>Ver en el mapa</ion-label>
+            <ion-button fill="outline" shape="round" color="light" slot="end"
+              >Ver</ion-button
+            >
+          </ion-item>-->
+         
+          <ion-card-content>
+            <ion-list >
+              <ion-item  *ngFor="let question of opinionStatistics">
+                
+                <ion-text size="small">
+                    <h3><b>{{question.type}}</b></h3>
+                    <p>{{question.content}}</p>
+                <p><b>Media resultados</b></p>
+                <ion-badge>{{question.value}}</ion-badge>
+              </ion-text>
+              </ion-item>
+            </ion-list>
+            <hr />
+            <!--<ion-button size="small" shape="round" color="light"  [routerLink]="'chats/' + chat.id">
+                  <ion-icon name="chatbubbles"></ion-icon>
+                  <ion-label>talk</ion-label>
+                  <ion-badge>{{ chat.messages.length }}</ion-badge>
+                </ion-button>-->
+      
+            <!--<ion-button size="small" shape="round" color="light"  [routerLink]="'chats/' + chat.id">
+                  <ion-icon name="construct"></ion-icon>
+                  <ion-label>work</ion-label>
+                </ion-button>
+          
+                <ion-button size="small" shape="round" color="light"  [routerLink]="reflect">
+                  <ion-icon name="thumbs-up"></ion-icon>
+                  <ion-label>reflect</ion-label>
+                  <ion-badge>6</ion-badge>
+                </ion-button>
+                -->
+          </ion-card-content>
+        </ion-card>
+
+ </ng-container>
+  <ion-card *ngFor="let card of cards$" [hidden]="card.selected == true">
+    <ion-card-header>
+      <ion-card-title
+        class="ion-padding"
+        [ngStyle]="{ 'background-color': card.color }"
+      >
+        <strong> {{card.type}}</strong>
+        <ion-icon name="{{ card.icon }}"></ion-icon>
+      </ion-card-title>
+      <ion-card-title class="ion-padding">{{ card.message }}</ion-card-title>
+    </ion-card-header>
+    <ion-card-content class="ion-padding">
+        <ion-text class="ion-padding">{{ card.description }}</ion-text>
+      <form [formGroup]="thinkForm">
+        <ion-list>
+          <!-- <ion-list-header>esta carta va a...</ion-list-header>
+          <ion-item>
+            <p class="ion-padding">{{ card.description }}</p>
+          </ion-item>-->
+          <ion-item>
+            <ion-range
+              formControlName="thinkAnswer"
+              min="0"
+              max="10"
+              step="1"
+              snaps="true"
+              pin="true"
+            >
+              <!-- <ion-icon size="small" slot="start" name="star"></ion-icon>
+            <ion-icon slot="end" name="star"></ion-icon>-->
+              <ion-label slot="start">0</ion-label>
+              <ion-label slot="end">10</ion-label>
+            </ion-range>
+          </ion-item>
+
+          <!-- <ion-radio-group formControlName="answer">
+            <ion-list-header>
+                {{ card.description }}
+              </ion-list-header>
+
+            <ion-item *ngFor="let member of membersList$ | async">
+              <ion-label>{{ member.name }}</ion-label>
+              <ion-radio value="{{ member.id }}"></ion-radio>
+            </ion-item>
+          </ion-radio-group>-->
+        </ion-list>
+
+        <ion-item>
+          <!--<ion-icon name="pin" slot="start"></ion-icon>
+          <p>Piensa en una persona de tu grupo para darle esta carta y...</p>-->
+          <ion-button
+            size="small"
+            shape="round"
+            color="light"
+            slot="end"
+            (click)="
+              sendReflection(
+                card.id,
+                card.type,
+                card.message,
+                thinkForm.value.thinkAnswer
+              );
+              setSelected(card.id)
+            "
+            >¡Esto creo!</ion-button
+          >
+          <!--<ion-checkbox disabled="true">Asignada</ion-checkbox>-->
+        </ion-item>
+      </form>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

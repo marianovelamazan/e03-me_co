@@ -1,0 +1,96 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title size="small">
+      co-lab: draw a model
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="close()"><ion-icon name="close-circle"></ion-icon></ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <!--<ion-fab top left>
+          <button ion-fab mini color="dark" (click)="close()"></button>
+      </ion-fab>
+      <ion-navbar >
+      <ion-title center>Draw and write a problem here!</ion-title>
+      </ion-navbar >-->
+  <ion-fab vertical="top" left activated slot="fixed">
+    
+    <ion-fab-button size="small" shape="round" color="medium"
+      ><ion-icon name="create"></ion-icon
+    ></ion-fab-button>
+    
+      
+      <ion-fab-list side="end">
+        <ion-fab-button
+          size="small"
+          shape="round"
+          color="light"
+          *ngFor="let colour of availableColours"
+          icon-only
+          (click)="changeColour(colour)"
+        >
+          <ion-icon [style.color]="colour" name="color-fill"></ion-icon>
+        </ion-fab-button>
+      </ion-fab-list>
+    
+    <ion-fab-list>
+      <ion-fab-button (click)="draw()"
+        ><ion-icon name="create"></ion-icon
+      ></ion-fab-button>
+      <ion-fab-button (click)="draw_text()"
+      ><ion-icon name="list"></ion-icon
+    ></ion-fab-button>
+    <ion-fab-button (click)="show_background()"
+    ><ion-icon name="image"></ion-icon>
+  </ion-fab-button>
+      <ion-fab-button (click)="select()"
+        ><ion-icon name="arrow-round-up"></ion-icon
+      ></ion-fab-button>
+
+      
+      <!--<ion-fab-button (click)="draw_line()"><ion-icon name="line"></ion-icon></ion-fab-button>
+
+      <ion-fab-button (click)="draw_rect()"
+        ><ion-icon name="square-outline"></ion-icon
+      ></ion-fab-button>
+      <ion-fab-button (click)="draw_circle()"
+        ><ion-icon name="radio-button-off"></ion-icon
+      ></ion-fab-button>
+      <ion-fab-button (click)="draw_triangle()"
+        ><ion-icon name="arrow-dropup"></ion-icon
+      ></ion-fab-button>
+      <ion-fab-button (click)="undo_last_object()"
+        ><ion-icon name="undo"></ion-icon
+      ></ion-fab-button>-->
+
+      <ion-fab-button (click)="remove_object()"
+        ><ion-icon name="trash"></ion-icon
+      ></ion-fab-button>
+    </ion-fab-list>
+  </ion-fab>
+
+  <!--
+  <ion-fab vertical="bottom"   size="small" >
+    <ion-fab-button
+      size="small"
+      shape="round"
+      color="light"
+      (click)="send_model();"
+      ><ion-icon name="share"></ion-icon
+    ></ion-fab-button>
+  </ion-fab>
+  -->
+  <ion-fab vertical="bottom" horizontal="center" size="small">
+    <ion-fab-button
+      size="small"
+      shape="round"
+      color="light"
+      (click)="send_model();"
+      ><ion-icon name="send"></ion-icon
+    ></ion-fab-button>
+  </ion-fab>
+  <canvas id="my_canvas"></canvas>
+</ion-content>

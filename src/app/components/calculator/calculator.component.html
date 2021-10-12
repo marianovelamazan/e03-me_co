@@ -1,0 +1,63 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title size="small">
+      co-lab: calculator
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="cancelCalcModal()"
+        ><ion-icon name="close-circle"></ion-icon
+      ></ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content class="ion-padding">
+  <ion-card>
+    <ion-card-header>
+      <ion-label class="value" class="ion-padding">
+        {{ value }}
+      </ion-label>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-grid>
+        <ion-row>
+          <ion-col size="10">
+            <div
+              *ngFor="let numGroup of numberGroups"
+              style="float:left;clear:both;"
+            >
+              <ion-button
+                *ngFor="let num of numGroup"
+                (click)="onButtonPress(num)"
+                size="small"
+                shape="round"
+                color="light"
+                >{{ num }}</ion-button
+              >
+            </div>
+          </ion-col>
+          <ion-col size="2">
+            <ion-button
+              size="small"
+              shape="round"
+              color="medium"
+              vertical="bottom"
+              (click)="dismissModal()"
+              ><ion-icon name="send"></ion-icon
+            ></ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+      <!--<div>
+    <ion-fab vertical="bottom" horizontal="right" size="small">
+      <ion-fab-button
+        size="small"
+        shape="round"
+        color="light"
+        (click)="messageIntentionsMenu($event)"
+        ><ion-icon name="send"></ion-icon
+      ></ion-fab-button>
+    </ion-fab>
+  </div>-->
+    </ion-card-content>
+  </ion-card>
+</ion-content>

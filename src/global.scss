@@ -1,0 +1,269 @@
+/*
+ * App Global CSS
+ * ----------------------------------------------------------------------------
+ * Put style rules here that you want to apply globally. These styles are for
+ * the entire app and not just one component. Additionally, this file can be
+ * used as an entry point to import other CSS/Sass files to be included in the
+ * output CSS.
+ * For more information on global stylesheets, visit the documentation:
+ * https://ionicframework.com/docs/layout/global-stylesheets
+ */
+
+/* Core CSS required for Ionic components to work properly */
+@import "~@ionic/angular/css/core.css";
+
+/* Basic CSS for apps built with Ionic */
+@import "~@ionic/angular/css/normalize.css";
+@import "~@ionic/angular/css/structure.css";
+@import "~@ionic/angular/css/typography.css";
+@import '~@ionic/angular/css/display.css';
+
+/* Optional CSS utils that can be commented out */
+@import "~@ionic/angular/css/padding.css";
+@import "~@ionic/angular/css/float-elements.css";
+@import "~@ionic/angular/css/text-alignment.css";
+@import "~@ionic/angular/css/text-transformation.css";
+@import "~@ionic/angular/css/flex-utils.css";
+
+//MIS FUENTES
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:ital@0;1&display=swap');
+:root,
+:root[mode="md"],
+:root[mode="ios"]{
+    --ion-font-family: 'Roboto Mono', monospace;
+    font-family: var(--ion-font-family) !important;
+    font-size: 16px;
+    --ion-background-color: snow;
+    --ion-color-light:snow;
+}
+
+:root{
+    background-color: snow;
+
+    --ion-background-color-rgb: snow;
+}
+.calculator-modal
+    {
+        width:80%;
+        height: 50%;
+        top: 30%;
+        left: 10%;
+        border-radius: 5%;
+        border-width: 3px;
+        border-color: grey;
+        //margin: 10px;
+//background: rgba(0,0,0,0.7);
+box-shadow: 0 16px 20px rgba(0,0,0,.4);
+    }
+
+
+
+.homeHeader ion-title {
+    width: 65%;
+    flex: 0 0 60%;
+    display: inline-block;
+}
+
+.homeHeader ion-item {
+  width: 33.33%;
+  flex: 0 0 33.33%;
+  display: inline-block;
+  vertical-align: middle;
+  --inner-padding-end: 0;
+  --padding-start: 0;
+  --min-height: auto;
+  text-align: right;
+  --border-width: 0;
+}
+.homeHeader ion-item ion-select {
+  padding: 0;
+  max-width: 100%;
+  width: 100%;
+  font-weight: normal;
+  //font-size: 18px;
+  //line-height: 23px;
+  color: #000000;
+  opacity: 1;
+  --color: #000;
+  --opacity: 1;
+}
+.homeHeader ion-item ion-select .select-placeholder {
+  opacity: 1;
+  color: #000;
+}
+
+
+.createTeamMain{
+  position: relative;
+  width:100%;
+}
+.createTeamMain .createteamInner {
+  padding: 16px;
+  width:100%;
+}
+.pageNumber {
+  position: absolute;
+  bottom: 14px;
+  right: 19px;
+}
+.createTeamMain .createteamInner h3 {
+    margin: 0;
+    font-style: normal;
+    font-weight: 500;
+    //font-size: 24px;
+    //line-height: 31px;
+    color: #000000;
+}
+ion-slides {
+  height: 100%;
+}
+.ionslidesForm ion-item {
+    --min-height: auto;
+    --inner-padding-end: 0;
+    //--padding-start: 0;
+   
+}
+.ionslidesForm ion-label{
+  font-style: normal;
+  font-weight: normal;
+  //font-size: 18px !important;
+  //line-height: 23px !important;
+  color: #000000 !important;
+}
+.ionslidesForm {
+    padding-top: 3em;
+}
+
+.ionslidesForm .swiper-pagination {
+    display: none;
+}
+ion-row.secondFields {
+    padding-bottom: 3em;
+}
+
+ion-row.buttonSecond {
+    padding: 1em;
+    text-align: left;
+}
+
+.buttonSecond ion-button {
+    //margin: 0;
+    --border-radius: 25px;
+    --background: #FFFAF0;
+    --ion-color-base: #FFFAF0;
+    --ion-color-primary: #FFFAF0;
+    background: #FFFAF0;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 25px;
+    font-weight: normal;
+    //font-size: 18px;
+    //line-height: 23px;
+    color: #000;
+    --ion-color-primary-contrast: #000;
+    --color: #000;
+    text-transform: lowercase;
+    //max-width: 163px;
+    //width: 163px;
+    text-align: left;
+    //height: 51px;
+}
+.ionslidesForm input {
+  color: #000000;
+  --placeholder-color:#dcdada;
+  font-weight: normal;
+  //font-size: 18px;
+  //line-height: 23px;
+  //width:100%;
+}
+
+.ionslidesForm ion-input {
+  --color: #000000;
+  --placeholder-color:#dcdada;
+  font-weight: normal;
+  //font-size: 18px;
+  //line-height: 23px;
+  //width:100%;
+}
+.negative_emotions{
+  background-color: red;
+  color:snow;
+  padding: 1em;
+  border-radius: 80%;
+  background-image: "./assets/heart.png";
+}
+
+h1{
+  text-align: center;
+}
+a{
+  text-decoration: none;
+}
+img {
+    border-radius: 50%;
+    display: block;
+    margin: auto;
+    width: 50px;
+    height:50px;
+  }
+
+.user-info{
+  text-align: center;
+}
+
+.usr_profile_button{
+  padding-left: 1em;
+
+}
+form {
+  margin: 2em;
+  button {
+    margin: 1em !important;
+  }
+}
+.achievement_color{
+  background-color:lightPink;
+}
+.epistemic_color{
+  background-color: Moccasin;
+}
+.social_color{
+  background-color:PaleTurquoise;
+}
+p {
+  font-size: small;
+  //font-size: 0.8em;
+  
+}
+
+ion-label {
+  margin: 0.5em;
+  padding: 0.5em;
+}
+
+ion-input {
+  padding: 0.5em;
+  margin: 0.5em;
+}
+
+.invalid {
+  border-bottom: 1px solid #ff6153;
+}
+
+.error-message {
+  min-height: 2.2rem;
+  ion-label {
+    margin: 2px 0;
+    font-size: 60%;
+    color: #ff6153;
+  }
+  .item-inner {
+    border-bottom: 0 !important;
+  }
+}
+ion-textarea{
+  border-radius: 15px;
+  border: 1px dotted rgb(119, 110, 110);
+  padding:0.5em;
+  font-size: 50%;
+}
+

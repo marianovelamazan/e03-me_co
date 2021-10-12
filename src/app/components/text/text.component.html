@@ -1,0 +1,101 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title size="small"> sending new {{ msgIntention$ }} </ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="cancelModal()"
+        ><ion-icon name="close-circle"></ion-icon
+      ></ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content padding>
+  <div class="form">
+    <!--ESTO ES PARA PODER SUBIR ARCHIVOS-->
+    <!--<ion-button
+      size="small"
+      shape="round"
+      color="light"
+      (click)="showUploadForm($event)"
+    >-->
+
+    <div class="input_msg">
+      <h3>{{ msgIntention$ }}</h3>
+      <p>{{ typeOfMsgExplanation$ }}</p>
+
+      <ul *ngIf="msgIntention$ == 'emotional'" size="small">
+        <li>you trust your group</li>
+        <li>you feel part of the team</li>
+        <li>you can share your feelings</li>
+        <li>they are doing well</li>
+        <li>you respect them</li>
+        <li>apologize for something</li>
+        <li>or make a joke!</li>
+      </ul>
+
+      <hr />
+      <ion-textarea
+        spellcheck="true"
+        cols="30"
+        rows="8"
+        placeholder="{{ msgIntentionStarter$ }}"
+        [(ngModel)]="newMsg"
+      ></ion-textarea>
+    </div>
+    <!--<ion-button
+    size="small"
+    shape="round"
+    color="light"
+    (click)="messageIntentionsMenu($event)"
+  >
+    <ion-icon name="chatbubbles"></ion-icon>
+  </ion-button>-->
+    <ion-item lines="none">
+      <ion-item lines="none">
+        <ion-button
+          size="small"
+          shape="round"
+          color="light"
+          expand="block"
+          (click)="showDrawingPicture()"
+          ><ion-icon src="./assets/create.svg"></ion-icon>
+        </ion-button>
+        <ion-button
+          size="small"
+          shape="round"
+          color="light"
+          expand="block"
+          (click)="showUploadCameraPicture()"
+          ><ion-icon src="./assets/camera.svg"></ion-icon>
+        </ion-button>
+        <ion-button
+          size="small"
+          shape="round"
+          color="light"
+          expand="block"
+          (click)="showCalculator()"
+          ><ion-icon src="./assets/calculator.svg"></ion-icon>
+        </ion-button>
+      </ion-item>
+
+      <ion-button
+        slot="end"
+        size="small"
+        shape="round"
+        fill="clear"
+        (click)="dismissModal()"
+        [disabled]="!newMsg"
+      >
+        <ion-icon src="./assets/send.svg"></ion-icon>
+      </ion-button>
+    </ion-item>
+    <!--<ion-button
+    size="small"
+    shape="round"
+    expand="block"
+    color="light"
+    [routerLink]="'/reflections/' + chat.id"
+  >
+    <ion-icon src="./assets/meh-rolling-eyes-regular.svg"></ion-icon>
+  </ion-button>-->
+  </div>
+</ion-content>

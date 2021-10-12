@@ -1,0 +1,375 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+
+    <ion-title size="small" *ngIf="teamName">
+      team {{ teamName }} chat
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-button
+        slot="end"
+        size="small"
+        shape="round"
+        expand="block"
+        (click)="showAllMessages()"
+      >
+        <ion-icon src="./assets/eye-on.svg"></ion-icon>
+      </ion-button>
+      <ion-button
+        slot="end"
+        size="small"
+        shape="round"
+        color="light"
+        expand="block"
+        (click)="photoproblemVisibility()"
+      >
+        <ion-icon src="./assets/document.svg"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ng-container *ngIf="chat$ | async as chat">
+  <ng-container *ngIf="auth.user$ | async as user">
+    <ion-content
+      class="chat"
+      [scrollEvents]="true"
+      [fullscreen]="true"
+      #IonContent
+    >
+      <ion-row class="top">
+        <ion-col
+          [ngClass]="{
+            usr_profile_button_bg: j % 2 == 0,
+            usr_profile_button_bg_odd: j % 2 != 0
+          }"
+          [size]="cs.getColumnWidth()"
+          *ngFor="let us of cs.usersNew; let j = index"
+        >
+        
+          <!--SI QUIERO ANULAR LA IMAGEN: *ngIf="us?.photoURL" -->
+          <ion-button
+            class="usr_prfl_btn"
+            color="light"
+            shape="round"
+            size="small"
+            (click)="showMemberEmotions(us.uid, us.photoURL, us.displayName)"
+          >
+            <img
+              class="user_avatar_top"
+              [src]="us?.photoURL || './assets/unicorn.svg'"
+            />
+            
+          </ion-button>
+          <ion-badge  color="danger" size="small">  </ion-badge>
+          <div class="displayName_top" >
+            {{ us.displayName }}
+          <span class="negative_emotions">{{negative_emotions[j].negative_emotions}}</span>
+            <!--<div *ngFor="let e of userEmotions$ | async">
+              <div *ngFor="let em of e.opinions" >
+              </div>
+              </div>
+           <ion-text >{{ms.getNegativeEmotions(us.uid, chatId)}}</ion-text>-->
+          </div>
+        </ion-col>
+      </ion-row>
+      <hr />
+      <hr />
+      <hr />
+      <hr />
+      <ion-row
+        class="msg"
+        *ngFor="let msg of chat.messages; trackBy: trackByCreated"
+      >
+      <ion-icon
+            class="anonymous"
+            color="danger"
+            *ngIf="msg.msgIntention == 'anonymous'"
+            [src]="'./assets/anonymous.svg'"
+            (click)="showMessage(msg)"
+          ></ion-icon>
+        <ion-col
+          class="ion-text-center user-col"
+          
+          [size]="cs.getColumnWidth()"
+          *ngFor="let us of cs.usersNew; let i = index; trackBy: trackByUid"
+        >
+          <div *ngIf="msg.uid == us.uid" style="width: 100%">
+            <!--
+              OJO!! PARA TENER UNA CLASE EN FUNCIÓN DE UN MÉTEDO/VARIABLE:[ngClass]="getMsgClass(i, msg.msgIntention)"
+              <ion-icon slot="start" *ngIf="msg.msgIntention != undefined && msg.msgIntention == 'anonymous'"
+              [src]="'./assets/' + msg.msgIntention + '.svg'"
+            >
+            
+            </ion-icon>-->
+            <ion-icon
+              *ngIf="
+                msg.msgIntention != undefined && msg.msgIntention != 'anonymous'
+              "
+              [src]="'./assets/' + msg.msgIntention + '.svg'"
+              (click)="showMessage(msg)"
+            >
+            </ion-icon>
+
+            <!--<img
+              (click)="showMessage(msg)"
+              class="chat-img"
+              *ngIf="msg.type == 'image'"
+              [src]="msg.content.filepath"
+            />-->
+          </div>
+        </ion-col>
+        <!--<ion-card class="msgCard" *ngIf="showMessage$ && msgSelected$ === msg">-->
+        <!--<ion-card-header >-->
+
+        <!--<ion-item >-->
+        <!--<img class="user_avatar" *ngIf="msg.msgIntention != 'anonymous'" [src] = "msg.user?.photoURL || './assets/unicorn.svg'" />-->
+        <!--<div *ngIf="msg.msgIntention != 'anonymous'"><ion-text ><p class="displayName">{{ msg.user?.displayName }}</p></ion-text></div>-->
+        <!--<ion-button slot="end" shape="round" fill="clear" (click)="hideMessage(msg)"><ion-icon src="./assets/close.svg"></ion-icon></ion-button>-->
+        <!--</ion-item>-->
+        <!--<ion-card-title>
+              <img class="user_avatar" *ngIf="msg.msgIntention != 'anonymous'" [src] = "msg.user?.photoURL || './assets/unicorn.svg'" />
+            </ion-card-title>
+            <ion-card-subtitle>
+              <div *ngIf="msg.msgIntention != 'anonymous'"><ion-text ><p class="displayName">{{ msg.user?.displayName }}</p></ion-text></div>
+            </ion-card-subtitle>
+          -->
+        <!-- </ion-card-header> -->
+        <!--<ion-card-content>
+            <ion-item  lines="none">
+            <p *ngIf="msg.type != undefined && msg.type != 'image'">
+              {{ msg.content }}
+            </p>
+            <img
+              class="chat-img"
+              *ngIf="msg.type == 'image'"
+              [src]="msg.content.filepath"
+            />
+          </ion-item>
+              <ion-item lines="none">
+
+                  <ion-row>
+
+                      <ion-col size="9">
+
+                         
+                          <ion-item lines="none" class="overflowRemove">
+                              <ion-button class="buttonForAcceptAnswer"
+                                      color="light"
+                                      shape="round"
+                                      size="default"
+                                      (click)="cs.markAsAnswer(chat, msg, users$)"
+                              >{{msg?.acceptedAsAnswerBy?.length == users$.length ? 'activity finished' : 'correct!'}}
+                                  {{msg?.acceptedAsAnswerBy?.length}}/{{users$.length}}
+                              </ion-button>
+                          </ion-item>
+                      </ion-col>
+                      <ion-col size="3">
+                          <ion-item lines="none">
+                              <ion-button
+                                      slot="end"
+                                      size="small"
+                                      shape="round"
+                                      color="danger"
+
+                                      *ngIf="chat.uid === user.uid || msg.uid === user.uid"
+                                      (click)="cs.deleteMessage(chat, msg)"
+                              ><ion-icon src="./assets/trash.svg"></ion-icon
+                              ></ion-button>
+                          </ion-item>
+                      </ion-col>
+                  </ion-row>
+
+              </ion-item>
+          </ion-card-content>
+        </ion-card>
+      -->
+        <ion-card class="msgCard" *ngIf="showAllMessages$ || (showMessage$ && msgSelected$ === msg)">
+          
+          <!--<div *ngIf="msg.msgIntention != 'anonymous'"><ion-text ><p class="displayName">{{ msg.user?.displayName }}</p></ion-text></div>-->
+
+          <!--<ion-card-content>-->
+          <ion-item lines="none">
+            <p *ngIf="msg.type != undefined && msg.type != 'image'">
+              {{ msg.content }}
+            </p>
+            <img
+              class="chat-img"
+              *ngIf="msg.type == 'image'"
+              [src]="msg.content.filepath"
+            />
+          </ion-item>
+          <ion-item lines="none">
+            <ion-row>
+              <ion-col>
+                <!--                      *ngIf="msg.uid == user.uid"-->
+                <ion-item lines="none" class="overflowRemove">
+                  <ion-button
+                    class="buttonForAcceptAnswer"
+                    color="light"
+                    shape="round"
+                    size="small"
+                    (click)="cs.markAsAnswer(chat, msg, users$)"
+                    >{{
+                      msg?.acceptedAsAnswerBy?.length == users$.length
+                        ? "activity finished"
+                        : "correct!"
+                    }}
+                    {{ msg?.acceptedAsAnswerBy?.length }}/{{ users$.length }}
+                  </ion-button>
+                </ion-item>
+              </ion-col>
+              <ion-col>
+                <ion-item lines="none" >
+                  <ion-button
+                    slot="end"
+                    size="small"
+                    shape="round"
+                    color="danger"
+                    fill="clear"
+                    *ngIf="chat.uid === user.uid || msg.uid === user.uid"
+                    (click)="cs.deleteMessage(chat, msg)"
+                    ><ion-icon src="./assets/trash.svg"></ion-icon
+                  ></ion-button>
+                </ion-item>
+              </ion-col>
+            </ion-row>
+          </ion-item>
+          <!-- </ion-card-content>-->
+        </ion-card>
+      </ion-row>
+      <ion-row> </ion-row>
+    </ion-content>
+
+    <ion-card *ngIf="photoproblemIsVisible$" class="photo-problem-card">
+      <ion-card-header>
+        <ion-card-subtitle>{{ activity.subTitle }}</ion-card-subtitle>
+        <ion-card-title>{{ activity.title }}</ion-card-title>
+        <hr />
+        <img class="foto-problem" [src]="activity.image" />
+      </ion-card-header>
+
+      <ion-card-content>
+        <ion-text>
+          <p>
+            {{ activity.text }}
+          </p>
+          <ul
+            class="foto-problem-explanations"
+            *ngIf="activity.images && activity.images.length > 0"
+          >
+            <li *ngFor="let image of activity.images"><img [src]="image" /></li>
+          </ul>
+          <p *ngIf="activity.text2">
+            {{ activity.text2 }}
+          </p>
+        </ion-text>
+      </ion-card-content>
+    </ion-card>
+    <!--<ion-card *ngIf="calculatorIsVisible$" class="photo-problem" style="height:80%;">
+            <ion-card-content>
+
+             <app-calculator>{{showCalculator()}}</app-calculator>
+            </ion-card-content>
+          </ion-card>-->
+    <ion-footer>
+      <ion-toolbar>
+        <ion-buttons slot="start">
+          <ion-button
+            size="small"
+            shape="round"
+            expand="block"
+            (click)="showProposal()"
+            ><ion-icon src="./assets/proposal.svg"></ion-icon>
+          </ion-button>
+
+          <ion-button
+            size="small"
+            shape="round"
+            expand="block"
+            (click)="showInfo()"
+            ><ion-icon src="./assets/info.svg"></ion-icon>
+          </ion-button>
+          <ion-button
+            size="small"
+            shape="round"
+            expand="block"
+            (click)="showQuestion()"
+            ><ion-icon src="./assets/question.svg"></ion-icon>
+          </ion-button>
+          <!--
+      <ion-button
+
+          size="small"
+          shape="round"
+
+          expand="block"
+          (click)="showDrawingPicture()"
+        ><ion-icon src="./assets/create.svg"></ion-icon>
+      </ion-button>
+      
+      <ion-button
+
+          size="small"
+          shape="round"
+
+          expand="block"
+          (click)="showUploadCameraPicture()"
+        ><ion-icon src="./assets/camera.svg"></ion-icon>
+      </ion-button>
+      
+          <ion-button
+
+          size="small"
+          shape="round"
+
+          expand="block"
+          (click)="showCalculator()"
+        ><ion-icon src="./assets/calculator.svg"></ion-icon>
+      </ion-button>
+    -->
+        
+          <ion-button
+            size="small"
+            shape="round"
+            expand="block"
+            (click)="showEmotional()"
+          >
+            <ion-icon name="people"></ion-icon>
+          </ion-button>
+
+          <ion-button
+            size="small"
+            shape="round"
+            expand="block"
+            (click)="showAnonymous()"
+            ><ion-icon src="./assets/anonymous.svg"></ion-icon>
+          </ion-button>
+          <!--
+          <ion-button
+          size="small"
+          shape="round"
+          expand="block"
+          [routerLink]="'/reflections/' + chat.id"
+        >
+          <ion-icon src="./assets/meh-rolling-eyes-regular.svg"></ion-icon>
+        </ion-button>
+        -->
+        </ion-buttons>
+        <ion-buttons slot="end">
+        <ion-button
+          size="small"
+          shape="round"          
+          [routerLink]="'/self-emotions/' + chat.id"
+        >
+          <ion-icon name="heart"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+      </ion-toolbar>
+    </ion-footer>
+  </ng-container>
+</ng-container>
+
+<!--</ion-content>-->

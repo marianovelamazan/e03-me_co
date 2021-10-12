@@ -1,0 +1,64 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title size="small">
+      select type of message
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="dismissModal()"
+        ><ion-icon name="close-circle"></ion-icon
+      ></ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content class="ion-padding">
+<ion-list>
+  <ion-list-header>
+    
+    <ion-label>types of messages:</ion-label>
+    
+  </ion-list-header>
+  
+  <ion-item (click)="anonymous()" color="dark">
+    <!--<ion-button size="small" shape="round" color="medium" (click)="anonymous()">-->
+    <ion-icon color="light" src="assets/anonymous.svg" class="ion-padding"></ion-icon>
+    <ion-label color="light">anónimo</ion-label>
+    <!--</ion-button>-->
+  </ion-item>
+  <hr>
+  
+  <ion-item (click)="proposal()">
+    <!--<ion-button size="small" shape="round" color="medium" (click)="info()">-->
+    <ion-icon name="bulb" class="ion-padding"></ion-icon>
+    <ion-label>idea, solución</ion-label>
+    <!--</ion-button>-->
+  </ion-item>
+
+  <ion-item (click)="info()">
+    <!--<ion-button size="small" shape="round" color="medium" (click)="info()">-->
+    <ion-icon name="information-circle" class="ion-padding"></ion-icon>
+    <ion-label>información</ion-label>
+    <!--</ion-button>-->
+  </ion-item>
+
+  <ion-item (click)="modelling()">
+    <!--<ion-button size="small" shape="round" color="medium" (click)="info()">-->
+        <ion-icon name="create"  class="ion-padding"></ion-icon>
+    <ion-label>modelo, dibujo</ion-label>
+    <!--</ion-button>-->
+  </ion-item>
+
+  <ion-item (click)="checking()">
+    <!--<ion-button size="small" shape="round" color="medium" (click)="info()">-->
+        <ion-icon name="checkmark-circle"  class="ion-padding"></ion-icon>
+    <ion-label>resultado, comprobación </ion-label>
+    <!--</ion-button>-->
+  </ion-item>
+
+  <ion-item (click)="presenting()">
+    <!--<ion-button size="small" shape="round" color="medium" (click)="info()">-->
+        <ion-icon src="./assets/readme-brands.svg"  class="ion-padding"></ion-icon>
+    <ion-label>solución y razonamiento</ion-label>
+    <!--</ion-button>-->
+  </ion-item>
+</ion-list>
+</ion-content>

@@ -1,0 +1,38 @@
+CHAT COMPONENT
+X do icons appear in their column?
+smtp is not working
+notifications is not working
+
+X upload photograph msg intention menu
+X organizar los botones de tipos de mensaje vs. media
+X centrar icono columna miembro
+X-menú crear equipo
+X slide de nombre de equipo
+X recolocar iconos barra inferior
+X colores columnas usuario 2
+X columna msg anónimo
+X dibujar
+X al cerrar calculadora y dibujo sale intención de mensaje equivocada
+X emociones usuario 2, 3, etc
+X textos de las emociones
+X comprobar los estilos de la primera columna
+X ver los mensajes anónimos en vista actividad
+X ver el icono emocional
+X que se vea si alguien reporta emociones negativas
+
+signup page con foto?
+hacer un icono para lo emocional
+sentiment analysis???
+
+la salida de las emociones se repite si se rellena más de una vez (?)
+
+en general, dar más visibilidad a lo emocional
+
+mensajes de shared-reg (emotional scaffolding msfg)
+botón de correcto solo en las ideas?
+respuesta rápida
+profile page
+
+internacionalización
+puntos de tipos de mensajes
+colores para los mensajes

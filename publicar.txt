@@ -1,0 +1,17 @@
+APK
+ionic cordova build android --prod --release
+**OJO NO ES NECESARIO YA**: keytool -genkey -v -keystore my-release-key.jks -keyalg RSA -keysize 2048 -validity 10000 -alias my-alias
+jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore my-release-key.jks platforms/android/app/build/outputs/apk/release/app-release-unsigned.apk my-alias
+cd C:\Users\maria\AppData\Local\Android\Sdk\build-tools\28.0.3
+.\zipalign -v 4 D:\phd\experiments\e03-co-lab\platforms\android\app\build\outputs\apk\release\app-release-unsigned.apk co-lab.apk
+.\zipalign -v 4 D:\Research\phd\experiments\03-colab-team-activity\e03-co-lab-shared\platforms\android\app\build\outputs\apk\release\app-release-unsigned.apk co-lab.apk
+.\apksigner verify co-lab.apk
+cd D:\Research\phd\experiments\03-colab-team-activity\e03-co-lab-shared
+
+BUNDLE
+ionic cordova build android --prod --release
+cd platforms/android
+
+.\gradlew bundle
+cd ../..
+jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore my-release-key.jks platforms/android/app/build/outputs/bundle/release/app.aab my-alias  

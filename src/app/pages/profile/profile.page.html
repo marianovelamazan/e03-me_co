@@ -1,0 +1,214 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home"></ion-back-button>
+    </ion-buttons>
+    <ion-title size="small">profile Page</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="logOut()">
+        <ion-icon slot="icon-only" name="log-out"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-list>
+    <!--<ion-list-header> personal Information </ion-list-header>-->
+    <ion-item>
+      <ion-grid>
+      <ion-row>
+        <ion-col>
+          <img [src]="profileImage$?.filepath || userProfile$?.photoURL || 'assets/unicorn.svg' " />
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+        <ion-button
+          size="7"
+          shape="round"
+          color="light"
+          (click)="showUploadPicture()"
+        >
+          <ion-icon name="person"></ion-icon>
+          <ion-label>upload profile picture</ion-label>
+          <!--<ion-badge color="dark" slot="end">2</ion-badge>-->
+        </ion-button>
+      </ion-col>
+      </ion-row>
+    </ion-grid>
+    </ion-item>
+    <hr/>
+    <!--
+    <ion-card *ngFor="let emotion of emotions$" [hidden]="emotion.selected == true">
+      <ion-card-header>
+        <ion-card-title
+          class="ion-padding"
+          [ngStyle]="{ 'background-color': emotion.color }"
+        >
+          <strong> {{emotion.type}}</strong>
+          <ion-icon name="{{ emotion.icon }}"></ion-icon>
+        </ion-card-title>
+        <ion-card-title class="ion-padding">{{ emotion.emotion }}</ion-card-title>
+      </ion-card-header>
+      <ion-card-content class="ion-padding">
+          <ion-text class="ion-padding">{{ emotion.description }}</ion-text>
+        <form [formGroup]="emotionsForm">
+          <ion-list>
+            
+            <ion-item>
+              <ion-range
+                formControlName="emotionsAnswer"
+                min="0"
+                max="10"
+                step="1"
+                snaps="true"
+                pin="true"
+              >
+                <ion-label slot="start">0</ion-label>
+                <ion-label slot="end">10</ion-label>
+              </ion-range>
+            </ion-item>
+          </ion-list>
+  
+          <ion-item>
+            <ion-button
+              size="small"
+              shape="round"
+              color="light"
+              slot="end"
+              (click)="
+                sendEmotion(
+                  emotion.id,
+                  emotion.type,
+                  emotion.valence,
+                  emotion.emotion,
+                  emotion.description,
+                  emotion.answer,
+                  emotion.color,
+                  emotion.icon,
+                  
+                  emotionsForm.value.emotionsAnswer
+                );
+                setSelected(card.id)
+              "
+              >¡Esto creo!</ion-button
+            >
+          </ion-item>
+        </form>
+      </ion-card-content>
+    </ion-card>
+    -->
+   
+    <ion-item>
+    <ion-grid>
+       <!--DO NOT SHOW THIS BELOW 17/11/2020-->
+  <!--
+      <ion-list>
+        <h2>personal statistics</h2>
+      <ion-item>
+        <ion-label>information points: </ion-label><ion-badge>{{ infoPoints$ }}</ion-badge>
+      </ion-item>
+      <ion-item>
+        <ion-label>modelling points: </ion-label><ion-badge>{{ modellingPoints$ }}</ion-badge>
+      </ion-item>
+      <ion-item>
+        <ion-label>proposal points: </ion-label><ion-badge>{{ proposalPoints$ }}</ion-badge>
+      </ion-item>
+      <ion-item>
+        <ion-label>checking points: </ion-label><ion-badge>{{ checkingPoints$ }}</ion-badge>
+      </ion-item>
+      <ion-item>
+        <ion-label>presenting solution points: </ion-label><ion-badge>{{ presentingPoints$ }}</ion-badge>
+      </ion-item>
+    </ion-list>
+  -->
+    <h2>your profile</h2>
+      <ion-row>
+        
+        <ion-col class="text-left" size="5"> display name </ion-col>
+        <ion-col
+          class="text-center"
+          size="7"
+          *ngIf="userProfile$?.displayName "
+        >
+          {{userProfile$?.displayName}}
+        </ion-col>
+        <ion-col
+          size="7"
+          class="placeholder-profile text-center"
+          *ngIf="!userProfile$?.displayName"
+        >
+          <span> tap here to edit. </span>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-item>
+    <ion-item (click)="updateName()">
+      <ion-label>
+        <ion-grid>
+          <hr/>
+          <ion-row>
+            <ion-col class="text-left" size="5"> name </ion-col>
+            <ion-col
+              class="text-center"
+              size="7"
+              *ngIf="userProfile$?.firstName || userProfile$?.lastName "
+            >
+              {{userProfile$?.firstName}} {{userProfile$?.lastName}}
+            </ion-col>
+            <ion-col
+              size="7"
+              class="placeholder-profile text-center"
+              *ngIf="!userProfile$?.firstName"
+            >
+              <span> tap here to edit. </span>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label class="dob-label">date of Birth</ion-label>
+      <ion-datetime
+        displayFormat="MMM D, YYYY"
+        pickerFormat="D MMM YYYY"
+        [(ngModel)]="birthDate"
+        (ionChange)="updateDOB(birthDate)"
+      >
+      </ion-datetime>
+    </ion-item>
+    <ion-item (click)="updateEmail()">
+      <ion-label>
+        <ion-grid>
+          <ion-row>
+            <ion-col class="text-left" size="5"> e-mail </ion-col>
+            <ion-col class="text-center" size="7" *ngIf="userProfile$?.email">
+              {{userProfile$?.email}}
+            </ion-col>
+            <ion-col
+              size="7"
+              class="placeholder-profile text-center"
+              *ngIf="!userProfile$?.email "
+            >
+              <span> tap here to edit. </span>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-label>
+    </ion-item>
+
+    <ion-item (click)="updatePassword()">
+      <ion-label>
+        <ion-grid>
+          <ion-row>
+            <ion-col class="text-left" size="5"> Password </ion-col>
+            <ion-col class="text-center" size="7" class="placeholder-profile">
+              <span> Tap here to edit. </span>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+</ion-content>
